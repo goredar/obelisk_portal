@@ -1,0 +1,37 @@
+nav.top-bar data-topbar="" role="navigation"
+  ul.title-area
+    li.name
+      h1
+        a=t('app_name')
+  section.top-bar-section
+    ul.right
+      - if session[:user_id]
+        li
+          a=session[:user_name]
+        li.divider
+        li
+          a href="/signout"
+            = t("sign_out")
+      - else
+        li.active
+          a href="#" data-reveal-id="sign_to_call"
+            = t("sign_in")
+
+#sign_to_call.reveal-modal.small data-reveal=""
+  == form_tag("/signin", method: "post")
+    .row.collapse
+      .small-5.large-5.columns
+        span.prefix=t("user")
+      .small-7.large-7.columns
+        input id="username" name="username" type="text"
+    .row.collapse
+      .small-5.large-5.columns
+        span.prefix=t("pass")
+      .small-7.large-7.columns
+        input id="password" name="password" type="password"
+    .row
+      .small-3.large-3.columns
+        p
+      .small-6.large-6.columns
+        input.button.small.expand name="commit" type="submit" value=t("button_sign_in")
+      .small-3.large-3.columns

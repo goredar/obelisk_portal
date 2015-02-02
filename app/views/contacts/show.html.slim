@@ -1,0 +1,31 @@
+.row.collapse
+  .small-3.large-2.columns
+    span.prefix=t("contacts_filter")
+  small-9.large-10.columns
+    input#contacts_filter type="text" placeholder=t("input_text_for_search")
+.row#contacts data-equalizer=""
+  - @contacts.sort_by(&:extension).each do |contact|
+    .large-3.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile].join(':')
+      ul.pricing-table data-equalizer-watch=""
+        li.title=contact.name
+        li.description
+          b=contact.title || "---"
+          br=contact.company || "---"
+        li.bullet-item
+          =t("extension")
+          b=contact.extension
+        li.bullet-item
+          =t("home_phone")
+          b=contact.home
+        li.bullet-item
+          =t("mobile_phone")
+          b=contact.mobile
+        li.cta-button
+          - if session[:user_id]
+            a.button.tiny.expand href="#"
+              i.fi-telephone.large
+          - else
+            a.button.tiny.disabled.expand
+              i.fi-telephone.large
+  - (@contacts.count % 4).times do
+    .large-3.columns

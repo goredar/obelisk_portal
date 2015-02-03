@@ -4,7 +4,7 @@
   small-9.large-10.columns
     input#contacts_filter type="text" placeholder=t("input_text_for_search")
 .row#contacts data-equalizer=""
-  - @contacts.each_with_index do |contact, index|
+  - @contacts.each do |contact|
     .large-3.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile].join(':')
       ul.pricing-table data-equalizer-watch=""
         li.title=contact.name

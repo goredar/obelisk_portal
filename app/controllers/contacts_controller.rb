@@ -7,11 +7,12 @@ class ContactsController < ApplicationController
   end
   def updatedb
       Contact.delete_all
-    params["_json"].each do |contact|
+      p params
+    params["_json"].each do |contact| 
       Contact.new(contact.permit PERMITED_PARAMS).save
       #c = Contact.find_by_login contact[:login]
       #c ? c.update(contact.permit PERMITED_PARAMS) : Contact.new(contact.permit PERMITED_PARAMS).save
-    end
+    end if params["_json"]
     render :nothing => true
   end
 

@@ -12,14 +12,17 @@
           b=contact.title || "---"
           br=contact.company || "---"
         li.bullet-item
-          =t("extension")
-          b=contact.extension
+          span.left-box
+            i.fi-asterisk.large
+          b=contact.extension || "---"
         li.bullet-item
-          =t("home_phone")
-          b=contact.home
+          span.left-box
+            i.fi-telephone-accessible.large
+          b=contact.home || "---"
         li.bullet-item
-          =t("mobile_phone")
-          b=contact.mobile
+          span.left-box
+            i.fi-mobile-signal.large
+          b=contact.mobile || "---"
         li.cta-button
           - if session[:user_id]
             a.button.tiny.expand href="#"

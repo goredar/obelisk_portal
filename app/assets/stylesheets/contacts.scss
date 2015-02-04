@@ -2,6 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@mixin center_content {
+  display:-moz-box;
+  -moz-box-pack:center;
+  -moz-box-align:center;
+  /* Safari and Chrome */
+  display:-webkit-box;
+  -webkit-box-pack:center;
+  -webkit-box-align:center;
+  /* W3C */
+  display:box;
+  box-pack:center;
+  box-align:center;
+}
+
+li {
+  position: relative;
+}
+
 .large {
   font-size: 2em;
   line-height: 2em;
@@ -9,4 +27,14 @@
 
 .description {
   height: 7em;
+}
+
+.left-box {
+  @include center_content;
+  background-color: #999;
+  width: 20%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }

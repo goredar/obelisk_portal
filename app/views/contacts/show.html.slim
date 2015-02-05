@@ -5,7 +5,7 @@
   - case @current_view
   - when "tile_view"
     - @contacts.each do |contact|
-      .large-3.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile].join(':')
+      .large-3.medium-6.small-12.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile].join(':')
         ul.pricing-table
           li.title=contact.name
           li.description
@@ -18,13 +18,13 @@
                 span.right-box
                   b=contact.public_send(attr) || "---"
     - (@contacts.count % 4).times do
-      .large-3.columns
+      .large-3.medium-6.small-12.columns
   - when "table_view"
     table.expand
       thead
         tr
-          th Name
-          th Title
+          th =t("contact_name")
+          th =t("company_title")
           th =t("extension")
           th =t("home")
           th =t("mobile")

@@ -1,6 +1,9 @@
 ru:
   app_name: "Обелиск"
+  company_name: "Inproma Group"
   call_now: "Позвонить"
+  contact_name: "Имя сотрудника"
+  company_title: "Должность и организация"
   extension: "Внутренний"
   home: "Стационарный"
   mobile: "Мобильный"

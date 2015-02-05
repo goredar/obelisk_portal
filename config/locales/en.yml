@@ -1,6 +1,9 @@
 en:
   app_name: "Obelisk"
+  company_name: "Inproma Group"
   call_now: "Call NOW"
+  contact_name: "Employee name"
+  company_title: "Title and company"
   extension: "Extension"
   home: "Home"
   mobile: "Mobile"

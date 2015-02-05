@@ -982,7 +982,7 @@ $button-disabled-opacity: 0.5;
 // $price-table-margin-bottom: rem-calc(20);
 
 // We use these to control the title styles
-$price-title-bg: $steel;
+$price-title-bg: #2550B0;
 // $price-title-padding: rem-calc(15 20);
 // $price-title-align: center;
 // $price-title-color: $smoke;
@@ -1361,8 +1361,8 @@ $table-row-font-size: rem-calc(12);
 // $include-html-top-bar-classes: $include-html-classes;
 
 // Background color for the top bar
-// $topbar-bg-color: $oil;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg-color: #204590;
+$topbar-bg: $topbar-bg-color;
 
 // Height and margin
 // $topbar-height: 45px;
@@ -1391,7 +1391,7 @@ $topbar-margin-bottom: 1em;
 // $topbar-link-hover-lightness: -10%; // Darken by 10%
 // $topbar-link-bg: $topbar-bg;
 // $topbar-link-bg-color-hover: $charcoal;
-// $topbar-link-bg-hover: #272727;
+$topbar-link-bg-hover: #2550B0;
 // $topbar-link-bg-active: $primary-color;
 // $topbar-link-bg-active-hover: scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;

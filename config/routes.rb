@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'cookies/:name/:value' => "cookies#set"
+
   get "/signout" => "sessions#destroy"
   post "/signin" => "sessions#create"
+
   get 'contacts/show'
   post 'contacts/updatedb'
 

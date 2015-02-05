@@ -1,9 +1,9 @@
 en:
   app_name: "Obelisk"
   call_now: "Call NOW"
-  extension: "Extension: "
-  home_phone: "Home: "
-  mobile_phone: "Mobile: "
+  extension: "Extension"
+  home: "Home"
+  mobile: "Mobile"
   contacts_filter: "Contacts filter:"
   input_text_for_search: "input text for search..."
   sign_in: "Sign in to make calls"
@@ -14,3 +14,5 @@ en:
   logout: "You have successfully logged out."
   user: "Username"
   pass: "Password"
+  tile_view: "Tile"
+  table_view: "Table"

@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+
+  I18n.default_locale = :ru
+
   protect_from_forgery with: :exception
   before_action :set_locale
 
@@ -10,7 +13,14 @@ class ApplicationController < ActionController::Base
     session[:user_id]
   end
 
+  private
+
   def set_locale
-    I18n.locale = params[:locale] || "ru"
+    begin
+      I18n.locale = cookies[:locale] || I18n.default_locale
+    rescue
+      I18n.locale = I18n.default_locale
+    end
   end
+
 end

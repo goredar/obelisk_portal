@@ -1,10 +1,17 @@
 class ContactsController < ApplicationController
+
   before_action :require_localhost, only: :updatedb
   skip_before_action :verify_authenticity_token
+
   PERMITED_PARAMS = %i{login name extension mobile home company department title address}
+  VIEWS = %w{table_view tile_view}
+
   def show
+    @views = ContactsController::VIEWS
+    @current_view = @views.include?(cookies[:contacts_view]) ? cookies[:contacts_view] : @views.last
     @contacts = Contact.all
   end
+
   def updatedb
       Contact.delete_all
       p params
@@ -21,4 +28,5 @@ class ContactsController < ApplicationController
   def require_localhost
     render :nothing => true unless %w{::1 127.0.0.1}.include? request.remote_ip
   end
+
 end

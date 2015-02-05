@@ -5,6 +5,12 @@ nav.top-bar data-topbar="" role="navigation"
         a=t('app_name')
   section.top-bar-section
     ul.right
+      = yield :topbar_include
+      - I18n.available_locales.each do |l|
+        li.divider
+        li class="#{"active" if I18n.locale == l}"
+          a href="/cookies/locale/#{l}" #{l.upcase}
+      li.divider
       - if session[:user_id]
         li
           a=session[:user_name]

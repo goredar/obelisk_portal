@@ -8,3 +8,4 @@ $('#contacts_filter').bind 'input', ->
       $(this).hide()
     else
       $(this).show()
+$('#contacts_filter').focus()

@@ -25,16 +25,29 @@ li {
   line-height: 2em;
 }
 
-.description {
-  height: 7em;
+span.disabled {
+  background-color: #999;
 }
 
-.left-box {
+li.description {
   @include center_content;
-  background-color: #999;
+  padding: 0 0.5em !important;
+  height: 6em;
+}
+
+span.left-box {
+  @include center_content;
   width: 20%;
   height: 100%;
   position: absolute;
   left: 0;
   top: 0;
+}
+
+span.right-box {
+  padding-left: 15%;
+}
+
+table.expand {
+  width: 100%;
 }

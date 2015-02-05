@@ -1,0 +1,6 @@
+- content_for :topbar_include do
+  - @views.each do |view|
+    li.divider
+    li class="#{"active" if @current_view == view}"
+      a href="/cookies/contacts_view/#{view}"
+        = t(view)

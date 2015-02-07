@@ -15,7 +15,7 @@ role :db,  %w{in-voip}
 # server list. The second argument is a, or duck-types, Hash and is
 # used to set extended properties on the server.
 
-server 'in-voip', user: 'root', roles: %w{web app db}, my_property: :my_value
+server 'in-voip', user: 'goredar', roles: %w{web app db}, my_property: :my_value
 
 
 # Custom SSH Options

@@ -9,7 +9,7 @@ class ContactsController < ApplicationController
   def show
     @views = ContactsController::VIEWS
     @current_view = @views.include?(cookies[:contacts_view]) ? cookies[:contacts_view] : @views.last
-    @contacts = Contact.all
+    @contacts = Contact.all.sort_by { |i| i.name.split[1] }
   end
 
   def updatedb

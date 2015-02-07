@@ -1,0 +1,2 @@
+module AsteriskHelper
+end

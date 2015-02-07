@@ -3,7 +3,7 @@ lock '3.3.5'
 
 set :application, 'obelisk_portal'
 set :repo_url, 'git@github.com:goredar/obelisk_portal.git'
-
+set :rvm_type, :system
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
@@ -29,7 +29,7 @@ set :linked_files, fetch(:linked_files, []) << 'config/database.yml' << 'config/
 set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
-# set :default_env, { path: "/opt/ruby/bin:$PATH" }
+# set :default_env, { path: "/usr/local/rvm/gems/ruby-2.1.3/bin:$PATH" }
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5

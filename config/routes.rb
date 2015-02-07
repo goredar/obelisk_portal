@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get '/make_call/:callee' => "asterisk#make_call"
+
   get 'cookies/:name/:value' => "cookies#set"
 
   get "/signout" => "sessions#destroy"

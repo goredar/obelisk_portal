@@ -6,11 +6,10 @@ class SessionsController < ApplicationController
       contact = Contact.find_by_login(session[:user_id])
       session[:user_name] = contact ? contact.name : ldap_user.name
       flash[:success] = t("login_success")
-      redirect_to root_path
     else
       flash[:alert] = t("login_error")
-      redirect_to root_path
     end
+    redirect_to root_path
   end
 
   def destroy

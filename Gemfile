@@ -40,6 +40,7 @@ gem 'capistrano-rails'
 gem 'foundation-rails'
 gem 'slim-rails'
 gem 'adauth'
+gem 'ruby-asterisk'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

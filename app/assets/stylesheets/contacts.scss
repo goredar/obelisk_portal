@@ -25,9 +25,16 @@ li {
   line-height: 2em;
 }
 
-span.disabled {
-  background-color: #999;
+.contact span {
+  &.disabled {
+    background-color: #999;
+  }
+  &.enabled {
+    background-color: #03D0a5;
+  }
 }
+
+
 
 li.description {
   @include center_content;

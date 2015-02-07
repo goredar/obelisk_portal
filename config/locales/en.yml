@@ -19,3 +19,6 @@ en:
   pass: "Password"
   tile_view: "Tile"
   table_view: "Table"
+  call_queued: "Your call successfully queued. Please, wait..."
+  failed_to_queue_call: "Failed to put a call. Please, try later..."
+  should_login_to_call: "You should sign in to make calls."

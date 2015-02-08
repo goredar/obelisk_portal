@@ -20,6 +20,8 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    active_directory (1.6.0)
+      net-ldap (>= 0.1.1)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -36,9 +38,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    adauth (2.0.5)
-      expects (~> 0.0.2)
-      net-ldap
     arel (6.0.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -72,7 +71,6 @@ GEM
     debugger-linecache (1.2.0)
     erubis (2.7.0)
     execjs (2.2.2)
-    expects (0.0.3)
     foundation-icons-sass-rails (3.0.0)
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
@@ -191,7 +189,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  adauth
+  active_directory
   byebug
   capistrano
   capistrano-bundler

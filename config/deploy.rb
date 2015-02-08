@@ -23,7 +23,7 @@ set :deploy_to, '/srv/obelisk_portal'
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, fetch(:linked_files, []) << 'config/database.yml' << 'config/initializers/adauth.rb' << 'config/secrets.yml'
+set :linked_files, fetch(:linked_files, []) << 'config/database.yml' << 'config/ad.yml' << 'config/secrets.yml' << 'config/asterisk.yml'
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')

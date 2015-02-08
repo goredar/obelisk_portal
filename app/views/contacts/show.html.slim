@@ -5,10 +5,11 @@
   - case @current_view
   - when "tile_view"
     - @contacts.each do |contact|
-      .large-3.medium-6.small-12.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile].join(':')
+      .large-3.medium-6.small-12.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
         ul.pricing-table
           li.title=contact.name
           li.description
+            = image_tag("businessman.png", class: "photo", alt: "Edit Entry")
             b=contact.title
             br=contact.company
           - { extension: "asterisk", home: "telephone-accessible", mobile: "mobile-signal" }.each do |attr, icon|
@@ -22,25 +23,41 @@
                       b=contact.public_send(attr)
                   - else
                     b=contact.public_send(attr) || "---"
+          li.bullet-item
+            span.left-box.enabled
+              i.large.fi-mail
+            span.right-box
+              a href="mailto:#{contact.mail}"
+                = contact.mail
     - (@contacts.count % 4).times do
       .large-3.medium-6.small-12.columns
   - when "table_view"
     table.expand
       thead
         tr
-          th =t("contact_name")
-          th =t("company_title")
-          th =t("extension")
-          th =t("home")
-          th =t("mobile")
+          th= t("contact_name")
+          th= t("company_title")
+          th= t("extension")
+          th width="12%"
+            = t("home")
+          th width="12%"
+            = t("mobile")
+          th= t("mail")
       tbody
         - @contacts.each do |contact|
-          tr.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile].join(':')
+          tr.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
             td
-              b=contact.name
+              b= contact.name
             td
-              b=contact.title
-              br=contact.company
-            td=contact.extension
-            td=contact.home
-            td=contact.mobile
+              b= contact.title
+              br= contact.company
+            - [:extension, :home, :mobile].each do |attr|
+              td
+                - if @call_available.include?(attr) && session[:user_id] && contact.public_send(attr)
+                  a href="/make_call/#{contact.public_send(attr)}"
+                    = contact.public_send(attr)
+                - else
+                  = contact.public_send(attr)
+            td
+              a href="mailto:#{contact.mail}"
+                = contact.mail

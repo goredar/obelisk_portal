@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
   def create
-    ldap_user = Adauth.authenticate(params[:username], params[:password])
-    if ldap_user
-      session[:user_id] = ldap_user.login
-      contact = Contact.find_by_login(session[:user_id])
-      session[:user_name] = contact ? contact.name : ldap_user.name
+    ldap_user = ActiveDirectory::User.find :first, :samaccountname => params[:username]
+    p ldap_user
+    if ldap_user && ldap_user.authenticate(params[:password])
+      session[:user_id] = ldap_user.samaccountname.force_encoding("UTF-8")
+      session[:user_name] = ldap_user.displayname.force_encoding("UTF-8")
       flash[:success] = t("login_success")
     else
       flash[:alert] = t("login_error")

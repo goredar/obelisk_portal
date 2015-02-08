@@ -1,6 +1,7 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
 $('#contacts_filter').bind 'input', ->
   pattern = $(this).val()
   $('#contacts .contact').each ->
@@ -9,3 +10,4 @@ $('#contacts_filter').bind 'input', ->
     else
       $(this).show()
 $('#contacts_filter').focus()
+console.log $(document).cookie("saved_search_string")

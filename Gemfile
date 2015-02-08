@@ -39,7 +39,7 @@ gem 'capistrano-rails'
 
 gem 'foundation-rails'
 gem 'slim-rails'
-gem 'adauth'
+gem 'active_directory'
 gem 'ruby-asterisk'
 
 group :development, :test do

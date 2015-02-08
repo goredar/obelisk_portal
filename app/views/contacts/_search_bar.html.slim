@@ -1,5 +1,7 @@
 .row.collapse
-  .small-3.medium-3.large-3.columns
-    span.prefix=t("contacts_filter")
+  .small-2.medium-2.large-2.columns
+    span.prefix = t("contacts_filter")
+  .small-1.medium-1.large-1.columns
+    a.button.prefix#clear_contacts_filter = t("clear")
   .small-9.medium-9.large-9.columns
-    input#contacts_filter type="text" placeholder=t("input_text_for_search")
+    input#contacts_filter type = "text" placeholder = t("input_text_for_search")

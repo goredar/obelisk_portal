@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-filter_contacts = (pattern) ->
+filter_contacts = (pattern = "") ->
   $('#contacts_filter').val pattern
   $.cookie "saved_search_string", pattern
   $('#contacts .contact').each ->

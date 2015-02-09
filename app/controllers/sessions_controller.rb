@@ -2,6 +2,8 @@ class SessionsController < ApplicationController
   def create
     ldap_user = ActiveDirectory::User.find :first, :samaccountname => params[:username]
     p ldap_user
+    p ldap_user.groups
+    p ldap_user.member_of?("_BookAdmins")
     if ldap_user && ldap_user.authenticate(params[:password])
       session[:user_id] = ldap_user.samaccountname.force_encoding("UTF-8")
       session[:user_name] = ldap_user.displayname.force_encoding("UTF-8")

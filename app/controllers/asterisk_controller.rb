@@ -1,11 +1,10 @@
 class AsteriskController < ApplicationController
 
-  @@ami = RubyAsterisk::AMI.new(ASTERISK_CONFIG["host"], ASTERISK_CONFIG["port"])
-  @@ami.login(ASTERISK_CONFIG["username"], ASTERISK_CONFIG["password"])
-
   def make_call
     if session[:user_id]
-      flash[:info] = @@ami.send(:execute, 'Originate', { 'Channel' => "SIP/#{session[:user_id]}",
+      ami = RubyAsterisk::AMI.new(ASTERISK_CONFIG["host"], ASTERISK_CONFIG["port"])
+      ami.login(ASTERISK_CONFIG["username"], ASTERISK_CONFIG["password"])
+      flash[:info] = ami.send(:execute, 'Originate', { 'Channel' => "SIP/#{session[:user_id]}",
                                           'Exten' => params["callee"],
                                           'Context' => "from-internal",
                                           'Priority' => "1",

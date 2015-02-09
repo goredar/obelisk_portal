@@ -1,7 +1,7 @@
 conf = YAML.load_file(Rails.root.join('config/ad.yml')).fetch(Rails.env)
 
 module ActiveDirectory
-  module Contacts
+  class Contacts
 
     @mapping = {}
     @mutex = Mutex.new
@@ -26,6 +26,13 @@ module ActiveDirectory
         # Delete old records (not in AD now)
         Contact.where("updated_at < :start_time", start_time: start_time).find_each { |c| c.destroy }
       end
+    end
+  end
+
+  class User
+    def member_of?(group)
+      return false unless group.is_a? String
+      groups.map(&:downcase).include? group.downcase
     end
   end
 end

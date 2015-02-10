@@ -2,7 +2,7 @@
 = form_tag("/contacts/edit/#{@contact.id}", method: "post", multipart: true)
   fieldset
     legend = @contact.name
-    - %i[title company department extension home mobile mail].each do |f|
+    - %i[title company department dob extension home mobile mail].each do |f|
       = contact_field_tag @contact, f
     .row.collapse
       .small-5.medium-4.large-3.columns

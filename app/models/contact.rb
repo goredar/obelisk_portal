@@ -8,7 +8,7 @@ class Contact < ActiveRecord::Base
 
   cattr_reader :role_can_edit
   @@role_can_edit = Hash.new([])
-  @@role_can_edit[:admin] = %i[extension mobile home company department title mail photo]
+  @@role_can_edit[:admin] = %i[extension mobile home company department title mail dob photo]
   @@role_can_edit[:manager] = %i[mobile home photo]
   @@role_can_edit[:user] = %i[photo]
 
@@ -23,6 +23,7 @@ class Contact < ActiveRecord::Base
     department: :department,
     title: :title,
     mail: :mail,
+    info: :dob,
   }
 
   cattr_reader :rails_only_attrs
@@ -95,7 +96,7 @@ class Contact < ActiveRecord::Base
     return true unless attrs
     @@rails_only_attrs.each { |a| attrs.delete a }
     return true if attrs.empty?
-    attrs = Hash[ attrs.map { |k,v| [@@ldap_mapping.key(k.to_sym).to_s, v] }]
+    attrs = Hash[ attrs.map { |k,v| [@@ldap_mapping.key(k.to_sym).to_s, v.to_s] }]
     (ldap_user = ActiveDirectory::User.find(:first, :samaccountname => login)) rescue return(false)
     ldap_user.update_attributes attrs
   end

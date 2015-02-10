@@ -44,6 +44,8 @@ gem 'active_directory'
 gem 'ruby-asterisk'
 gem 'mini_magick'
 
+gem 'russian'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

@@ -11,6 +11,7 @@ en:
   home: "Home"
   mobile: "Mobile"
   email: "E-mail"
+  dob: "Date of Birth"
   contacts_filter: "Contacts filter"
   clear: "Clear"
   input_text_for_search: "input text for search..."

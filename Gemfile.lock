@@ -137,6 +137,8 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
     ruby-asterisk (0.1.0)
+    russian (0.6.0)
+      i18n (>= 0.5.0)
     sass (3.4.11)
     sass-rails (5.0.1)
       railties (>= 4.0.0, < 5.0)
@@ -207,6 +209,7 @@ DEPENDENCIES
   pg
   rails (= 4.2.0)
   ruby-asterisk
+  russian
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   slim-rails

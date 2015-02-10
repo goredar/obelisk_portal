@@ -1,6 +1,6 @@
 .row.contacts#tile_view style=('display: none;' if @current_view != 'tile_view')
   - @contacts.each do |contact|
-    .large-3.medium-6.small-12.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
+    .large-3.medium-6.small-12.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':') class="#{'dob_this_month' if contact.dob && Date.today.month == contact.dob.month}"
       ul.pricing-table
         li.title
           - if session[:user_role] && session[:user_role] != "user"
@@ -12,9 +12,14 @@
           img.photo src = "images/contacts/#{contact.photo || (is_female?(contact.name) ? 'businesswoman.png' : 'businessman.png')}"
           b = contact.title
           br = contact.company
+        li.bullet-item
+          span.left-box.dob title = t("dob")
+            i.large.fi-calendar
+          span.right-box
+            = l(contact.dob, :format => :long) if contact.dob
         - { extension: "asterisk", home: "telephone-accessible", mobile: "mobile-signal" }.each do |attr, icon|
             li.bullet-item
-              span.left-box class="#{callable?(contact, attr) ? 'enabled' : 'disabled'}" title=t(attr)
+              span.left-box class="#{callable?(contact, attr) ? 'enabled' : 'disabled'}" title = t(attr)
                 i.large class="fi-#{icon}"
               span.right-box
                 - attr_value = contact.public_send(attr)
@@ -24,7 +29,7 @@
                 - else
                   b = (attr_value && !attr_value.empty?) ? attr_value : "---"
         li.bullet-item
-          span.left-box class = "#{ (contact.mail && !contact.mail.empty?) ? 'enabled' : 'disabled' }"
+          span.left-box class = "#{ (contact.mail && !contact.mail.empty?) ? 'enabled' : 'disabled' }" title = t("email")
             i.large.fi-mail
           span.right-box
             - if contact.mail && !contact.mail.empty?

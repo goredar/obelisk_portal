@@ -8,15 +8,25 @@ li, div{
 
 i.large {
   font-size: 2em;
-  line-height: 1.75em;
+  line-height: 1.5em;
 }
 
-.contact span {
-  &.disabled {
-    background-color: #999;
+.contact {
+  &.dob_this_month {
+    & li.title, span.dob {
+      background-color: #9B59B6;
+    }
   }
-  &.enabled {
-    background-color: #03D0a5;
+  & span {
+    &.disabled {
+      background-color: #BDC3C7;
+    }
+    &.enabled {
+      background-color: #2ECC71;
+    }
+    &.dob {
+      background-color: #3498DB;
+    }
   }
 }
 
@@ -31,6 +41,7 @@ li.description {
 
 li.bullet-item {
   padding-left: 25% !important;
+  height: 3em;
 }
 
 img.photo {
@@ -58,9 +69,9 @@ table.expand {
 }
 
 li.title a {
-  color: white;
+  color: #ECF0F1;
   &:hover {
-    color: #03D0a5;
+    color: #2C3E50;
   }
 }
 

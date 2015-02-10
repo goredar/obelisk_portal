@@ -5,13 +5,20 @@ module ContactsHelper
     end
   end
   def contact_field_tag(contact, field)
+    field_type =
+      case contact.public_send(field)
+      when Date
+        "date"
+      else
+        "text"
+      end
     %Q{
 <div class="row collapse">
   <div class="small-5 medium-4 large-3 columns">
     <span class="prefix">#{t(field)}</span>
   </div>
   <div class="small-7 medium-8 large-9 columns">
-  <input type="text" id="contact[#{field}]" name="contact[#{field}]" value='#{contact.send field}' #{'disabled' unless @user.permited_actions.include? field }>
+  <input type="#{field_type}" id="contact[#{field}]" name="contact[#{field}]" value='#{contact.public_send field}' #{'disabled' unless @user.permited_actions.include? field }>
   </div>
 </div>
       }.html_safe

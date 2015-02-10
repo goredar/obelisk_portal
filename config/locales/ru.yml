@@ -1,4 +1,7 @@
 ru:
+  date:
+    formats:
+      long: "%e %B %Y"
   app_name: "Обелиск"
   company_name: "Inproma Group"
   call_now: "Позвонить"
@@ -11,6 +14,7 @@ ru:
   home: "Стационарный"
   mobile: "Мобильный"
   email: "E-mail"
+  dob: "Дата рождения"
   contacts_filter: "Фильтр контактов"
   clear: "Очистить"
   input_text_for_search: "введите текст поиска..."

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217175507) do
+ActiveRecord::Schema.define(version: 20150224090833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20150217175507) do
     t.string   "mail"
     t.string   "photo"
     t.string   "role"
+    t.date     "dob"
   end
 
   add_index "contacts", ["login"], name: "index_contacts_on_login", using: :btree

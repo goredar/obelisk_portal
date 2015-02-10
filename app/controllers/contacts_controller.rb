@@ -20,7 +20,7 @@ class ContactsController < ApplicationController
     attrs_to_update = params[:contact] ? params[:contact].select{ |k,v| @user.allowed? k }.select{ |k,v| @contact.public_send(k) != v } \
         : nil
     if @contact.save_photo(params[:contact_photo], params[:delete_contact_photo]) \
-        && attrs_to_update ? @contact.update(attrs_to_update.permit!) : true \
+        && (attrs_to_update ? @contact.update(attrs_to_update.permit!) : true) \
         && @contact.update_user_in_ldap(attrs_to_update)
       flash[:success] = t("contact_update_done")
     else

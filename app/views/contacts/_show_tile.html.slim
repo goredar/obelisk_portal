@@ -1,6 +1,6 @@
 .row.contacts#tile_view style=('display: none;' if @current_view != 'tile_view')
   - @contacts.each do |contact|
-    .large-3.medium-6.small-12.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':') class="#{'dob_this_month' if contact.dob && Date.today.month == contact.dob.month}"
+    .large-3.medium-6.small-12.columns.contact data-filter = contact_filter_str(contact) class="#{'dob_this_month' if contact.dob && Date.today.month == contact.dob.month}"
       ul.pricing-table
         li.title
           - if session[:user_role] && session[:user_role] != "user"

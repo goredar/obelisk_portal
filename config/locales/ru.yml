@@ -42,3 +42,4 @@ ru:
   contact_update_failed: "Невозможно обновить контакт."
   require_login: "Необходимо авторизоваться."
   delete_photo: "Удалить фото"
+  birthday_month_select: "День рождения в"

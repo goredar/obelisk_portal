@@ -16,7 +16,6 @@ $('#contacts_filter').bind 'input', ->
 
 $("a[data-filter-contacts]").click (e) ->
   filter_contacts $(this).data "filter-contacts"
-  false
 
 $("a[data-view]").click (e) ->
   view = $(this).data('view')

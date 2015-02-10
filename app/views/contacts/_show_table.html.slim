@@ -12,7 +12,7 @@
         th= t("email")
     tbody
       - @contacts.each do |contact|
-        tr.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
+        tr.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail, contact.dob].join(':')
           td
             - if session[:user_role] && session[:user_role] != "user"
               a data-open-popup="#{contact.id}" 

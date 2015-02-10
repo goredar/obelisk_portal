@@ -26,4 +26,9 @@ module ContactsHelper
   def callable?(contact, attr)
     @call_available.include?(attr) && session[:user_id] && contact.public_send(attr) && !contact.public_send(attr).empty?
   end
+  def contact_filter_str(contact)
+    [contact.name, contact.title, contact.company, contact.extension, contact.home, 
+     contact.mobile, contact.mail, (l(contact.dob, :format => :long) if contact.dob),
+    ].join(':')
+  end
 end

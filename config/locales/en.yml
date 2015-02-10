@@ -39,3 +39,4 @@ en:
   contact_update_failed: "Fail to update contact."
   require_login: "Please, sign in."
   delete_photo: "Delete photo"
+  birthday_month_select: "Birthday month"

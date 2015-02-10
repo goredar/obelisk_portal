@@ -1,4 +1,5 @@
 class ContactsController < ApplicationController
+  before_action :require_login, only: [:update, :show_edit_form]
 
   VIEWS = %w{table_view tile_view}
 
@@ -10,8 +11,9 @@ class ContactsController < ApplicationController
   end
 
   def update
+    (redirect_to root_path and return) unless session[:user_id]
     @contact = Contact.find params[:id]
-    @user = params[:id] == session[:user_id] ? @contact : Contact.find(session[:user_id])
+    @user = (params[:id] == session[:user_id]) ? @contact : Contact.find(session[:user_id])
     if @user.role == "user" && params[:id] != session[:user_id]
       flash[:alert] = t("only_self")
       redirect_to root_path and return
@@ -33,11 +35,18 @@ class ContactsController < ApplicationController
   end
 
   def show_edit_form
+    (redirect_to root_path and return) unless session[:user_id]
     @contact = Contact.find params[:id]
-    @user = params[:id] == session[:user_id] ? @contact : Contact.find(session[:user_id])
+    @user = (params[:id] == session[:user_id]) ? @contact : Contact.find(session[:user_id])
     respond_to do |format|
       format.json
       format.html
     end
+  end
+
+  private
+
+  def require_login
+    (flash[:alert] = t("require_login"); redirect_to(root_path)) unless session[:user_id]
   end
 end

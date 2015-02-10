@@ -36,3 +36,4 @@ en:
   only_self: "You can edit only your Contact Record"
   contact_update_done: "Contact's been updated successfully."
   contact_update_failed: "Fail to update contact."
+  require_login: "Please, sign in."

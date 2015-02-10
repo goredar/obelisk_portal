@@ -3,6 +3,7 @@ class Contact < ActiveRecord::Base
   cattr_reader :user_roles
   @@user_roles = {
     admin: "_BookAdmins",
+    manager: "_BookManagers",
   }
   cattr_reader :role_can_edit
   @@role_can_edit = Hash.new([])

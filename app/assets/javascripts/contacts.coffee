@@ -8,7 +8,7 @@ filter_contacts = (pattern = "") ->
       $(this).hide()
     else
       $(this).show()
-  $('#contacts_filter').focus()
+#  $('#contacts_filter').focus()
 
 $('#contacts_filter').bind 'input', ->
   filter_contacts $(this).val()
@@ -55,4 +55,4 @@ $("input[data-update-upload]").on "change", () ->
   console.log $("##{$(this).data 'update-upload'}")
   console.log $("##{$(this).data 'update-upload'}").html()
 
-$('#contacts_filter').focus()
+#$('#contacts_filter').focus()

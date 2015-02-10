@@ -16,6 +16,9 @@ i.large {
     & li.title, span.dob {
       background-color: #9B59B6;
     }
+    & span.right-box {
+      font-weight: bold;
+    }
   }
   & span {
     &.disabled {
@@ -71,7 +74,7 @@ table.expand {
 li.title a {
   color: #ECF0F1;
   &:hover {
-    color: #2C3E50;
+    color: #BDC3C7;
   }
 }
 

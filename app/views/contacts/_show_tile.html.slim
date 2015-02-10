@@ -13,13 +13,13 @@
           b = contact.title
           br = contact.company
         li.bullet-item
-          span.left-box.dob title = t("dob")
+          span.left-box class = "#{contact.dob ? 'dob' : 'disabled'}" title = t("dob")
             i.large.fi-calendar
           span.right-box
             = l(contact.dob, :format => :long) if contact.dob
         - { extension: "asterisk", home: "telephone-accessible", mobile: "mobile-signal" }.each do |attr, icon|
             li.bullet-item
-              span.left-box class="#{callable?(contact, attr) ? 'enabled' : 'disabled'}" title = t(attr)
+              span.left-box class = "#{callable?(contact, attr) ? 'enabled' : 'disabled'}" title = t(attr)
                 i.large class="fi-#{icon}"
               span.right-box
                 - attr_value = contact.public_send(attr)

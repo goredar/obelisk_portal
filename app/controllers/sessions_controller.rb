@@ -14,6 +14,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    session[:user_login] = nil
     session[:user_name] = nil
     session[:user_role] = nil
     flash[:info] = t("logout")

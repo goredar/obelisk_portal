@@ -57,13 +57,15 @@ class Contact < ActiveRecord::Base
 
   def save_photo(io)
     if io
-      photo = MiniMagick::Image.read io.read
-      photo.resize "90x90"
-      photo.format "png"
-      filename = File.expand_path "photo_#{self.id}.png", PHOTO_PATH
-      photo.write filename
+      self.photo = "photo_#{self.id}_#{Time.new.to_i}.png"
+      filename = File.expand_path self.photo, PHOTO_PATH
+
+      ph = MiniMagick::Image.read io.read
+      ph.resize "90x90"
+      ph.format "png"
+      ph.write filename
+
       File.chmod 0644, filename
-      self.photo = "photo_#{self.id}.png"
     else
       self.photo = nil
     end

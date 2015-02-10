@@ -30,15 +30,12 @@ $("a[data-view]").click (e) ->
   false
 
 $("a[data-call]").click (e) ->
-  tid = setTimeout(() ->
-    $('#modal_alert').foundation('reveal', 'close')
-  ,7000)
+  clearTimeout window.timeout_id
   $.getJSON "/make_call/#{$(this).data('call')}.json", (data, status, xhr) ->
     $('#modal_alert .alert-box').text data['message']
-    clearTimeout tid
-    setTimeout(() ->
+    window.timeout_id = setTimeout(() ->
       $('#modal_alert').foundation('reveal', 'close')
-    ,7000)
+    ,5000)
     $('#modal_alert').foundation('reveal', 'open')
   $('#modal_alert .alert-box').text "Пожалуйста, снимите трубку!"
   $('#modal_alert').foundation 'reveal', 'open'

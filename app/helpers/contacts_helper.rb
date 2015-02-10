@@ -16,4 +16,7 @@ module ContactsHelper
 </div>
       }.html_safe
   end
+  def callable?(contact, attr)
+    @call_available.include?(attr) && session[:user_id] && contact.public_send(attr) && !contact.public_send(attr).empty?
+  end
 end

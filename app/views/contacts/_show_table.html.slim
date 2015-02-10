@@ -24,7 +24,7 @@
             br= contact.company
           - [:extension, :home, :mobile].each do |attr|
             td
-              - if @call_available.include?(attr) && session[:user_id] && contact.public_send(attr)
+              - if callable?(contact, attr)
                 a data-call = contact.public_send(attr)
                   = contact.public_send(attr)
               - else

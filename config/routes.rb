@@ -7,7 +7,8 @@ Rails.application.routes.draw do
   post "/signin" => "sessions#create"
 
   get 'contacts/show'
-  post 'contacts/edit/:id' => "contacts#edit"
+  get 'contacts/edit/:id' => "contacts#show_edit_form"
+  post 'contacts/edit/:id' => "contacts#update"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -16,7 +16,7 @@
   box-align:center;
 }
 
-li {
+li, div{
   position: relative;
 }
 
@@ -71,4 +71,28 @@ span.right-box {
 
 table.expand {
   width: 100%;
+}
+
+li.title a {
+  color: white;
+  &:hover {
+    color: #03D0a5;
+  }
+}
+
+.hiden {
+  display: none;
+}
+
+.raw {
+  position: relative;
+}
+
+input[type="file"] {
+  width: 100%;
+  opacity: 0;
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
 }

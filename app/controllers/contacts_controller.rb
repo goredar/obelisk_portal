@@ -9,6 +9,34 @@ class ContactsController < ApplicationController
     @contacts = Contact.all.map{ |c| c.name = c.name.split.reverse.join(' '); c}.sort_by(&:name)
   end
 
-  def edit
+  def update
+    @contact = Contact.find params[:id]
+    @user = params[:id] == session[:user_id] ? @contact : Contact.find(session[:user_id])
+    if @user.role == "user" && params[:id] != session[:user_id]
+      flash[:alert] = t("only_self")
+      redirect_to root_path and return
+    end
+    if params[:contact_photo]
+      photo = MiniMagick::Image.read params[:contact_photo].read
+      photo.resize "90x90"
+      photo.format "png"
+      photo.write Rails.root.join("public/images/photo_#{@contact.id}.png")
+      params[:contact][:photo] = "photo_#{@contact.id}.png"
+    end
+    if @contact.update params[:contact].select{ |k,v| @user.allowed? k }.permit!
+      flash[:success] = t("contact_update_done")
+    else
+      flash[:alert] = t("contact_update_failed")
+    end
+    redirect_to root_path
+  end
+
+  def show_edit_form
+    @contact = Contact.find params[:id]
+    @user = params[:id] == session[:user_id] ? @contact : Contact.find(session[:user_id])
+    respond_to do |format|
+      format.json
+      format.html
+    end
   end
 end

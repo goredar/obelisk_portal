@@ -42,6 +42,7 @@ gem 'foundation-rails'
 gem 'slim-rails'
 gem 'active_directory'
 gem 'ruby-asterisk'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

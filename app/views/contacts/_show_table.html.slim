@@ -1,0 +1,35 @@
+.row.contacts#table_view style=('display: none;' if @current_view != 'table_view')
+  table.expand
+    thead
+      tr
+        th= t("contact_name")
+        th= t("company_title")
+        th= t("extension")
+        th width="12%"
+          = t("home")
+        th width="12%"
+          = t("mobile")
+        th= t("email")
+    tbody
+      - @contacts.each do |contact|
+        tr.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
+          td
+            - if session[:user_role] && session[:user_role] != "user"
+              a data-open-popup="#{contact.id}" 
+                b = contact.name
+            - else
+              b = contact.name
+          td
+            b= contact.title
+            br= contact.company
+          - [:extension, :home, :mobile].each do |attr|
+            td
+              - if @call_available.include?(attr) && session[:user_id] && contact.public_send(attr)
+                a data-call = contact.public_send(attr)
+                  = contact.public_send(attr)
+              - else
+                = contact.public_send(attr)
+          td
+            - if contact.mail
+              a href="mailto:#{contact.mail}"
+                = contact.mail

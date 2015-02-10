@@ -1,37 +1,4 @@
 module ActiveDirectory
-  class Contacts
-
-    @@mapping = {}
-    @@mutex = Mutex.new
-
-    cattr_reader :user_roles
-
-    def self.setup(settings)
-      ActiveDirectory::Base.setup settings.fetch :ldap_params
-      @@user_roles = settings.fetch :roles
-      @@mapping = settings.fetch :mapping
-      update
-    end
-    def self.update
-      @@mutex.synchronize do
-        start_time = DateTime.now.utc
-        users = ActiveDirectory::User.find(:all)
-        users.reject! { |u| u[:name].include? "Test User" }.map! do |u|
-          k = @@mapping.values
-          v = @@mapping.keys.map { |attr| u.valid_attribute?(attr) ? u.send(attr).force_encoding("UTF-8") : nil }
-          Hash[k.zip v]
-        end
-        # Update or create
-        users.each do |user|
-          user_in_db = Contact.find_by_login user.fetch(:login)
-          user_in_db ? (user_in_db.update!(user); user_in_db.touch) : Contact.new(user).save!
-        end
-        # Delete old records (not in AD now)
-        Contact.where("updated_at < :start_time", start_time: start_time).find_each { |c| c.destroy }
-      end
-    end
-  end
-
   class User
     def member_of?(group)
       return false unless group.is_a? String
@@ -40,11 +7,12 @@ module ActiveDirectory
       end.include? group.downcase
     end
     def role
-      Contacts.user_roles.inject(:user) do |r, group|
+      Contact.user_roles.inject(:user) do |r, group|
         member_of?(group[1]) ? group[0] : r
       end
     end
   end
 end
 
-ActiveDirectory::Contacts.setup YAML.load_file(Rails.root.join('config/ad.yml')).fetch(Rails.env)
+ActiveDirectory::Base.setup YAML.load_file(Rails.root.join('config/ad.yml')).fetch(Rails.env)
+Contact.update_all_from_ldap

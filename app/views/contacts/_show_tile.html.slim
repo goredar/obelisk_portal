@@ -15,7 +15,7 @@
         li.bullet-item
           span.left-box class = "#{contact.dob ? 'dob' : 'disabled'}" title = t("dob")
             i.large.fi-calendar
-          span.right-box
+          span.right-box.dob_value
             = l(contact.dob, :format => :long) if contact.dob
         - { extension: "asterisk", home: "telephone-accessible", mobile: "mobile-signal" }.each do |attr, icon|
             li.bullet-item

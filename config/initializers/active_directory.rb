@@ -15,4 +15,10 @@ module ActiveDirectory
 end
 
 ActiveDirectory::Base.setup YAML.load_file(Rails.root.join('config/ad.yml')).fetch(Rails.env)
-Contact.update_all_from_ldap
+
+Thread.new do
+  loop do 
+    Contact.update_all_from_ldap rescue nil
+    sleep 3600
+  end
+end

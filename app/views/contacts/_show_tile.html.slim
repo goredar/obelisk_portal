@@ -9,7 +9,7 @@
           - else
             = contact.name
         li.description
-          img.photo src = "images/#{contact.photo || (is_female?(contact.name) ? 'businesswoman.png' : 'businessman.png')}"
+          img.photo src = "images/contacts/#{contact.photo || (is_female?(contact.name) ? 'businesswoman.png' : 'businessman.png')}"
           b = contact.title
           br = contact.company
         - { extension: "asterisk", home: "telephone-accessible", mobile: "mobile-signal" }.each do |attr, icon|

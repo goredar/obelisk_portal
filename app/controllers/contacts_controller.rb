@@ -11,21 +11,13 @@ class ContactsController < ApplicationController
   end
 
   def update
-    (redirect_to root_path and return) unless session[:user_id]
     @contact = Contact.find params[:id]
     @user = (params[:id] == session[:user_id]) ? @contact : Contact.find(session[:user_id])
     if @user.role == "user" && params[:id] != session[:user_id]
       flash[:alert] = t("only_self")
       redirect_to root_path and return
     end
-    if params[:contact_photo]
-      photo = MiniMagick::Image.read params[:contact_photo].read
-      photo.resize "90x90"
-      photo.format "png"
-      photo.write Rails.root.join("public/images/photo_#{@contact.id}.png")
-      File.chmod 0644, Rails.root.join("public/images/photo_#{@contact.id}.png")
-      params[:contact][:photo] = "photo_#{@contact.id}.png"
-    end
+    @contact.save_photo params[:contact_photo] if params[:contact_photo]
     if @contact.update params[:contact].select{ |k,v| @user.allowed? k }.permit!
       flash[:success] = t("contact_update_done")
     else
@@ -35,7 +27,6 @@ class ContactsController < ApplicationController
   end
 
   def show_edit_form
-    (redirect_to root_path and return) unless session[:user_id]
     @contact = Contact.find params[:id]
     @user = (params[:id] == session[:user_id]) ? @contact : Contact.find(session[:user_id])
     respond_to do |format|

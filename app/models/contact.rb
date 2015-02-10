@@ -23,9 +23,11 @@ class Contact < ActiveRecord::Base
     mail: :mail,
   }
 
+  PHOTO_PATH = File.expand_path("public/images/contacts/", Rails.root)
+
   def self.update_all_from_ldap
     start_time = DateTime.now.utc
-    users = ActiveDirectory::User.find(:all)
+    (users = ActiveDirectory::User.find(:all)) rescue return(nil)
     users.reject! { |u| u[:name].include? "Test User" }.map! do |u|
       k = @@ldap_mapping.values
       v = @@ldap_mapping.keys.map { |attr| u.valid_attribute?(attr) ? u.send(attr).force_encoding("UTF-8") : nil }
@@ -38,10 +40,11 @@ class Contact < ActiveRecord::Base
     end
     # Delete old records (not in AD now)
     self.where("updated_at < :start_time", start_time: start_time).find_each { |c| c.destroy }
+    users.count
   end
 
   def self.auth(user, pass)
-    ldap_user = ActiveDirectory::User.find :first, :samaccountname => user
+    (ldap_user = ActiveDirectory::User.find(:first, :samaccountname => user)) rescue return(false)
     if ldap_user && ldap_user.authenticate(pass)
       u = find_by_login user
       u.update! :role => ldap_user.role
@@ -51,6 +54,16 @@ class Contact < ActiveRecord::Base
     end
   end
 
+  def save_photo(io)
+    photo = MiniMagick::Image.read io.read
+    photo.resize "90x90"
+    photo.format "png"
+    filename = File.expand_path "photo_#{self.id}.png", PHOTO_PATH
+    photo.write filename
+    File.chmod 0644, filename
+    self.photo = "photo_#{self.id}.png"
+  end
+  
   def permited_actions
     @@role_can_edit[role.to_sym]
   end

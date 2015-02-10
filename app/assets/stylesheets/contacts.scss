@@ -2,27 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-@mixin center_content {
-  display:-moz-box;
-  -moz-box-pack:center;
-  -moz-box-align:center;
-  /* Safari and Chrome */
-  display:-webkit-box;
-  -webkit-box-pack:center;
-  -webkit-box-align:center;
-  /* W3C */
-  display:box;
-  box-pack:center;
-  box-align:center;
-}
-
 li, div{
   position: relative;
 }
 
-.large {
+i.large {
   font-size: 2em;
-  line-height: 2em;
+  line-height: 1.75em;
 }
 
 .contact span {
@@ -35,7 +21,6 @@ li, div{
 }
 
 li.description {
-  @include center_content;
   padding-left: 96px !important;
   padding-right: 6px !important;
   height: 90px;
@@ -57,7 +42,6 @@ img.photo {
 }
 
 span.left-box {
-  @include center_content;
   width: 20%;
   height: 100%;
   position: absolute;

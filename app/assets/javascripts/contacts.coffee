@@ -3,20 +3,19 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 filter_contacts = (pattern = "") ->
+  $('#contacts_filter').val(pattern)
   $('.contacts .contact').each ->
     if $(this).data('filter').toLowerCase().indexOf(pattern.toLowerCase()) == -1
       $(this).hide()
     else
       $(this).show()
-#  $('#contacts_filter').focus()
 
 $('#contacts_filter').bind 'input', ->
   filter_contacts $(this).val()
   false
 
-$('#clear_contacts_filter').click (e) ->
-  $('#contacts_filter').val("")
-  filter_contacts ""
+$("a[data-filter-contacts]").click (e) ->
+  filter_contacts $(this).data "filter-contacts"
   false
 
 $("a[data-view]").click (e) ->

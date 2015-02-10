@@ -9,4 +9,6 @@ class ContactsController < ApplicationController
     @contacts = Contact.all.map{ |c| c.name = c.name.split.reverse.join(' '); c}.sort_by(&:name)
   end
 
+  def edit
+  end
 end

@@ -1,16 +1,15 @@
 nav.top-bar data-topbar="" role="navigation"
   ul.title-area
     li.name
-      h1
-        a
-          = image_tag "logo.jpg", class: "logo"
+      a
+        = image_tag "logo.png", class: "logo"
   section.top-bar-section
     ul.right
       = yield :topbar_include
       - I18n.available_locales.each do |l|
         li.divider
         li class="#{"active" if I18n.locale == l}"
-          a href="/cookies/locale/#{l}" #{l.upcase}
+          a href="/locale/#{l}" #{l.upcase}
       li.divider
       - if session[:user_id]
         li

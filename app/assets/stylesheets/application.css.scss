@@ -18,6 +18,13 @@
 
 @import 'foundation-icons';
 
+.top-bar {
+  background-image: url("/images/topbar.png");
+  background-repeat: repeat-x;
+  background-position: left top;
+  background-size: auto 100%;
+}
+
 li.name, li.name h1, li.name h1 a {
   position: relative;
   height: 100%;

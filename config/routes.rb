@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   get '/make_call/:callee' => "asterisk#make_call"
 
-  get 'cookies/:name/:value' => "cookies#set"
+  get 'locale/:value' => "locales#set"
 
   get "/signout" => "sessions#destroy"
   post "/signin" => "sessions#create"
 
   get 'contacts/show'
-  post 'contacts/updatedb'
+  post 'contacts/edit/:id' => "contacts#edit"
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

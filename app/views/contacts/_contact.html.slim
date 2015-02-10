@@ -1,0 +1,12 @@
+#adamenko.reveal-modal.small data-reveal=""
+  = form_tag("/contacts/edit#{contact.id}", method: "post")
+      .row.collapse
+        .small-5.large-5.columns
+          span.prefix=t("name")
+        .small-7.large-7.columns
+          input id="contact[:name]" name="contact[:name]" type="text" value=contact.name
+      .row.collapse
+        .small-5.large-5.columns
+          span.prefix=t("pass")
+        .small-7.large-7.columns
+          input id="password" name="password" type="password"

@@ -1362,7 +1362,7 @@ $table-row-font-size: rem-calc(12);
 
 // Background color for the top bar
 // $topbar-bg-color: #204590;
-// $topbar-bg: $topbar-bg-color;
+$topbar-bg: #0353a5;
 
 // Height and margin
 // $topbar-height: 45px;
@@ -1392,7 +1392,7 @@ $topbar-margin-bottom: 1em;
 // $topbar-link-bg: $topbar-bg;
 // $topbar-link-bg-color-hover: $charcoal;
 $topbar-link-bg-hover: #22486f;
-$topbar-link-bg-active: #0353a5;
+$topbar-link-bg-active: #03D0a5; //#22486f;
 $topbar-link-bg-active-hover: #22486f; //scale-color($primary-color, $lightness: -14%);
 // $topbar-link-font-family: $body-font-family;
 // $topbar-link-text-transform: none;

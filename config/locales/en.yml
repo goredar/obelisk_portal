@@ -37,4 +37,4 @@ en:
   contact_update_done: "Contact's been updated successfully."
   contact_update_failed: "Fail to update contact."
   require_login: "Please, sign in."
-  delete_photo: "Delete photo from server instead of upload."
+  delete_photo: "Delete photo"

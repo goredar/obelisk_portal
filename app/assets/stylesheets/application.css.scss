@@ -17,3 +17,14 @@
  */
 
 @import 'foundation-icons';
+
+li.name, li.name h1, li.name h1 a {
+  position: relative;
+  height: 100%;
+  padding: 0 !important;
+}
+
+img.logo {
+  height: 100%;
+  //width: 100%;
+}

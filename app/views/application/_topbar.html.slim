@@ -2,7 +2,8 @@ nav.top-bar data-topbar="" role="navigation"
   ul.title-area
     li.name
       h1
-        a=t('company_name')
+        a
+          = image_tag "logo.jpg", class: "logo"
   section.top-bar-section
     ul.right
       = yield :topbar_include

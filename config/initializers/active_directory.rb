@@ -4,11 +4,11 @@ module ActiveDirectory
     @@mapping = {}
     @@mutex = Mutex.new
 
-    cattr_reader :admin_group
+    cattr_reader :user_roles
 
     def self.setup(settings)
       ActiveDirectory::Base.setup settings.fetch :ldap_params
-      @@admin_group = settings.fetch :admin_group
+      @@user_roles = settings.fetch :roles
       @@mapping = settings.fetch :mapping
       update
     end
@@ -39,8 +39,10 @@ module ActiveDirectory
         g.split(',').first.downcase.gsub /^cn=/, ''
       end.include? group.downcase
     end
-    def admin?
-      member_of? ActiveDirectory::Contacts.admin_group
+    def role
+      Contacts.user_roles.inject(:user) do |r, group|
+        member_of?(group[1]) ? group[0] : r
+      end
     end
   end
 end

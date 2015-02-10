@@ -4,7 +4,7 @@ class SessionsController < ApplicationController
     if ldap_user && ldap_user.authenticate(params[:password])
       session[:user_id] = ldap_user.samaccountname.force_encoding("UTF-8")
       session[:user_name] = ldap_user.displayname.force_encoding("UTF-8")
-      session[:admin] = ldap_user.admin?
+      session[:role] = ldap_user.role
       flash[:success] = t("login_success")
     else
       flash[:alert] = t("login_error")

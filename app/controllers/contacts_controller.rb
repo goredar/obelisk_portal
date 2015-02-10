@@ -11,14 +11,17 @@ class ContactsController < ApplicationController
   end
 
   def update
-    @contact = Contact.find params[:id]
-    @user = (params[:id] == session[:user_id]) ? @contact : Contact.find(session[:user_id])
-    if @user.role == "user" && params[:id] != session[:user_id]
+    if session[:user_role] == "user" && params[:id].to_i != session[:user_id]
       flash[:alert] = t("only_self")
       redirect_to root_path and return
     end
-    @contact.save_photo(params[:delete_contact_photo] ? nil : params[:contact_photo])
-    if @contact.update params[:contact].select{ |k,v| @user.allowed? k }.permit!
+    @contact = Contact.find params[:id]
+    @user = Contact.find session[:user_id]
+    attrs_to_update = params[:contact] ? params[:contact].select{ |k,v| @user.allowed? k }.select{ |k,v| @contact.public_send(k) != v } \
+        : nil
+    if @contact.save_photo(params[:contact_photo], params[:delete_contact_photo]) \
+        && attrs_to_update ? @contact.update(attrs_to_update.permit!) : true \
+        && @contact.update_user_in_ldap(attrs_to_update)
       flash[:success] = t("contact_update_done")
     else
       flash[:alert] = t("contact_update_failed")

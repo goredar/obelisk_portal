@@ -18,7 +18,11 @@ ActiveDirectory::Base.setup YAML.load_file(Rails.root.join('config/ad.yml')).fet
 
 Thread.new do
   loop do 
-    Contact.update_all_from_ldap rescue nil
+    if count = Contact.update_all_from_ldap
+      Rails.logger.info "Update users from ldap has been done. Processed #{count} users."
+    else
+      Rails.logger.error "Failed to update users from ldap."
+    end
     sleep 3600
   end
 end

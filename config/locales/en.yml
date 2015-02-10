@@ -24,3 +24,4 @@ en:
   failed_to_queue_call: "Failed to put a call. Please, try later..."
   should_login_to_call: "You should sign in to make calls."
   wait_for_call: "Please, wait for call..."
+  call_unknown: "Unknown call queue state."

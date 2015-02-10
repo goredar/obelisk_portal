@@ -24,10 +24,10 @@
                 - else
                   b = contact.public_send(attr) || "---"
         li.bullet-item
-          span.left-box class = "#{contact.mail ? 'enabled' : 'disabled'}"
+          span.left-box class = "#{ (contact.mail && !contact.mail.empty?) ? 'enabled' : 'disabled' }"
             i.large.fi-mail
           span.right-box
-            - if contact.mail
+            - if contact.mail && !contact.mail.empty?
               a href = "mailto:#{contact.mail}"
                 = contact.mail
             - else

@@ -21,6 +21,7 @@ class ContactsController < ApplicationController
       photo.resize "90x90"
       photo.format "png"
       photo.write Rails.root.join("public/images/photo_#{@contact.id}.png")
+      File.chmod 0644, Rails.root.join("public/images/photo_#{@contact.id}.png")
       params[:contact][:photo] = "photo_#{@contact.id}.png"
     end
     if @contact.update params[:contact].select{ |k,v| @user.allowed? k }.permit!

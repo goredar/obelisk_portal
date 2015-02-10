@@ -34,3 +34,5 @@ ru:
   button_photo: "Фото"
   no_file_selected: "Файл не выбран"
   only_self: "Вы можете отредактировать только свой Контакт."
+  contact_update_done: "Контакт успешно обновлен."
+  contact_update_failed: "Невозможно обновить контакт."

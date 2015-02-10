@@ -34,3 +34,5 @@ en:
   button_photo: "Photo"
   no_file_selected: "No file selected"
   only_self: "You can edit only your Contact Record"
+  contact_update_done: "Contact's been updated successfully."
+  contact_update_failed: "Fail to update contact."

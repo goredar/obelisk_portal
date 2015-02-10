@@ -5,14 +5,18 @@ class AsteriskController < ApplicationController
       ami = RubyAsterisk::AMI.new(ASTERISK_CONFIG["host"], ASTERISK_CONFIG["port"])
       ami.login(ASTERISK_CONFIG["username"], ASTERISK_CONFIG["password"])
       begin
-        message = ami.send(:execute, 'Originate', { 'Channel' => "SIP/#{session[:user_login]}",
-                                            'Exten' => params["callee"],
-                                            'Context' => "from-internal",
-                                            'Priority' => "1",
-                                            'Timeout' => '90000',
-                                            'Callerid' => session[:user_login],
-                                            'Async' => "false"
-                                          }).success ? t("call_queued") : t("failed_to_queue_call")
+        message = ami.send(:execute, 'Originate', \
+          {
+            'Channel' => "SIP/#{session[:user_login]}",
+            'Exten' => params["callee"],
+            'Context' => "from-internal",
+            'Priority' => "1",
+            'Timeout' => '60000',
+            'Callerid' => session[:user_login],
+            'Async' => "false"
+          }
+        ).success ? t("call_queued") : t("failed_to_queue_call")
+        ami.disconnect
       rescue
         message = t("call_unknown")
       end

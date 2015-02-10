@@ -26,6 +26,8 @@
                 - if callable?(contact, attr)
                   a data-call = attr_value
                     b = attr_value
+                    -if attr == :extension
+                      = " (#{Asterisk.get_peer_status(attr_value)})"
                 - else
                   b = (attr_value && !attr_value.empty?) ? attr_value : "---"
         li.bullet-item

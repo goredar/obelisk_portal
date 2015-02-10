@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    reset_session
+    session.destroy
     flash[:info] = t("logout")
     redirect_to root_path
   end

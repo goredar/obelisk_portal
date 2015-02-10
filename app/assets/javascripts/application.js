@@ -18,3 +18,8 @@
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
+
+$( window ).unload(function() {
+  $.ajax("/signout")
+  return nil;
+});

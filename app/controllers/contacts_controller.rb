@@ -17,8 +17,11 @@ class ContactsController < ApplicationController
     end
     @contact = Contact.find params[:id]
     @user = Contact.find session[:user_id]
-    attrs_to_update = params[:contact] ? params[:contact].select{ |k,v| @user.allowed? k }.select{ |k,v| @contact.public_send(k) != v } \
-        : nil
+    attrs_to_update = params[:contact] ? params[:contact].select{ |k,v| @user.allowed? k } : {}
+    attrs_to_update.select! do |k,v|
+      current_v = @contact.public_send(k)
+      current_v != v && !(current_v.nil? && v.empty?)
+    end
     if @contact.save_photo(params[:contact_photo], params[:delete_contact_photo]) \
         && (attrs_to_update ? @contact.update(attrs_to_update.permit!) : true) \
         && @contact.update_user_in_ldap(attrs_to_update)

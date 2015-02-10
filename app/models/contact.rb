@@ -92,8 +92,8 @@ class Contact < ActiveRecord::Base
     @@role_can_edit[role.to_sym].include? action.to_sym
   end
 
-  def update_user_in_ldap(attrs)
-    return true unless attrs
+  def update_user_in_ldap(attrs = {})
+    return false unless attrs.is_a? Hash
     @@rails_only_attrs.each { |a| attrs.delete a }
     return true if attrs.empty?
     attrs = Hash[ attrs.map { |k,v| [@@ldap_mapping.key(k.to_sym).to_s, v.to_s] }]

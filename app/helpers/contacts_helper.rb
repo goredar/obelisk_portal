@@ -5,13 +5,7 @@ module ContactsHelper
     end
   end
   def contact_field_tag(contact, field)
-    field_type =
-      case contact.public_send(field)
-      when Date
-        "date"
-      else
-        "text"
-      end
+    field_type = (field == :dob || contact.public_send(field).is_a?(Date)) ? "date" : "text"
     %Q{
 <div class="row collapse">
   <div class="small-5 medium-4 large-3 columns">

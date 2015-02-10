@@ -13,10 +13,6 @@ html
 
   body
     = render 'topbar'
-    .row
-      - flash.each do |name, msg|
-        .alert-box data-alert="" class="#{name}"
-          = msg
-          a.close href="#" &times
+    = render 'flash'
     = yield
     = javascript_include_tag "application"

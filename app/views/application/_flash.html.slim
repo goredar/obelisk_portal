@@ -1,0 +1,5 @@
+.row#flash_messages
+  - flash.each do |name, msg|
+    .alert-box.radius id="#{name}" data-alert="" class="#{name}" tabindex="0" aria-live="assertive" role="dialogalert"
+      = msg
+      a.close tabindex="0" aria-label="Close Alert" &times

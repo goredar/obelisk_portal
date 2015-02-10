@@ -1,21 +1,24 @@
-conf = YAML.load_file(Rails.root.join('config/ad.yml')).fetch(Rails.env)
-
 module ActiveDirectory
   class Contacts
 
-    @mapping = {}
-    @mutex = Mutex.new
+    @@mapping = {}
+    @@mutex = Mutex.new
 
-    def self.setup(mapping)
-      @mapping = mapping
+    cattr_reader :admin_group
+
+    def self.setup(settings)
+      ActiveDirectory::Base.setup settings.fetch :ldap_params
+      @@admin_group = settings.fetch :admin_group
+      @@mapping = settings.fetch :mapping
+      update
     end
     def self.update
-      @mutex.synchronize do
+      @@mutex.synchronize do
         start_time = DateTime.now.utc
         users = ActiveDirectory::User.find(:all)
         users.reject! { |u| u[:name].include? "Test User" }.map! do |u|
-          k = @mapping.values
-          v = @mapping.keys.map { |attr| u.valid_attribute?(attr) ? u.send(attr).force_encoding("UTF-8") : nil }
+          k = @@mapping.values
+          v = @@mapping.keys.map { |attr| u.valid_attribute?(attr) ? u.send(attr).force_encoding("UTF-8") : nil }
           Hash[k.zip v]
         end
         # Update or create
@@ -32,11 +35,14 @@ module ActiveDirectory
   class User
     def member_of?(group)
       return false unless group.is_a? String
-      groups.map(&:downcase).include? group.downcase
+      @entry.memberOf.map do |g|
+        g.split(',').first.downcase.gsub /^cn=/, ''
+      end.include? group.downcase
+    end
+    def admin?
+      member_of? ActiveDirectory::Contacts.admin_group
     end
   end
 end
 
-ActiveDirectory::Base.setup conf.fetch :ldap_params
-ActiveDirectory::Contacts.setup conf.fetch :mapping
-ActiveDirectory::Contacts.update
+ActiveDirectory::Contacts.setup YAML.load_file(Rails.root.join('config/ad.yml')).fetch(Rails.env)

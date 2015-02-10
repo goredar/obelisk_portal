@@ -1,6 +1,7 @@
 - content_for :topbar_include do
   - @views.each do |view|
     li.divider
-    li class="#{"active" if @current_view == view}"
-      a href="/cookies/contacts_view/#{view}"
+    li.view_buttons id="#{view}" class="#{"active" if @current_view == view}"
+      a data-view = view
         = t(view)
+#modal_alert.reveal-modal.small data-reveal=""

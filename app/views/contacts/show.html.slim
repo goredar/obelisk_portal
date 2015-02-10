@@ -1,68 +1,66 @@
 = render "search_bar"
 = render "topbar_include"
 
-.row#contacts
-  - case @current_view
-  - when "tile_view"
-    - @contacts.each do |contact|
-      .large-3.medium-6.small-12.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
-        ul.pricing-table
-          li.title=contact.name
-          li.description
-            - female = %w[Августа Аврора Агата Агафья Аглая Агнесса Агния Агриппина Агунда Ада Аделина Адель Адиля Адриана Аза Азалия Азиза Айгуль Аида Айжан Аксинья Акулина Алана Алевтина Александра Алена Алико Алина Алиса Алия Алла Алсу Альберта Альбина Альвина Альжбета Альфия Альфреда Амаль Амелия Амина Анастасия Ангелина Анеля Анжела Анисья Анита Анна Антонина Ануш Анфиса Аполлинария Ариадна Ариана Арина Архелия Асия Ассоль Астра Астрид Ася Аурелия Афанасия Аэлита Беатриса Белла Бенедикта Береслава Берта Биргит Бирута Богдана Божена Борислава Бронислав Бронислава Валентина Валерия Ванда Варвара Василина Василиса Венера Вера Вероника Веселина Весна Веста Вета Вида Виктория Вилора Виолетта Виргиния Виринея Виталия Владислава Владлена Габриэлла Галина Гаянэ Гелена Гелла Генриетта Георгина Гера Гертруда Глафира Глория Гортензия Гражина Грета Гузель Гулия Гульмира Гульназ Гульнара Дайна Далия Дамира Дана Даниэла Данута Дарина Дарья Дебора Джамиля Джемма Джулия Джульетта Диана Дилара Диля Дина Динара Диодора Дионисия Доля Доминика Дора Ева Евангелина Евгения Евдокия Екатерина Елена Елизавета Есения Ефимия Жанна Жасмин Жозефина Забава Заира Замира Зара Зарема Зарина Захария Земфира Зинаида Зита Злата Зоя Зульфия Зухра Иванна Иветта Ивона Ида Изабелла Изольда Изяслав Илария Илзе Илиана Илона Инара Инга Инесса Инна Иоанна Иоланта Ираида Ирена Ирина Ирма Исидора Июлия Ия Калерия Камилла Капитолина Карима Карина Каролина Катарина Кира Кирилла Клавдия Клара Кларисса Климентина Констанция Кора Кристина Ксения Лада Лайма Лана Лариса Лаура Лейла Лейсан Леокадия Леонида Леся Лиана Лидия Лилиана Лилия Лина Линда Лия Лола Лолита Луиза Лукерья Любовь Любомила Людмила Люция Магда Магдалина Мадина Майя Малика Мальвина Маргарита Марианна Марика Марина Мария Марселина Марта Марфа Марьям Матильда Мелания Мелисса Мила Милада Милана Милена Милица Милолика Милослава Мира Мирдза Мирослава Мирра Михайлина Михаэла Моника Муза Надежда Назира Наиля Нана Наталья Нателла Нелли Неонила Ника Николь Нина Нинель Нонна Нора Одетта Оксана Олеся Оливия Ольга Офелия Павла Памела Патриция Пелагея Полина Прасковья Рада Радмила Радосвета Раиса Ревекка Регина Рема Рената Римма Роберта Роза Роксана Ростислава Рузанна Рузиля Румия Руслана Руфина Сабина Сабрина Саида Саломея Сандра Сания Санта Сарра Светлана Северина Селена Серафима Сильва Сима Симона Снежана Созия Софья Станислава Стелла Стефания Сусанна Таира Таисия Тала Тамара Татьяна Теодора Тереза Тина Томила Ульяна Урсула Устина Фаиза Фаина Фания Фаня Фарида Фатима Фая Фекла Фелиция Феруза Флора Франсуаза Фредерика Фрида Харита Хильда Христина Христя Цветана Цецилия Чеслава Чулпан Шакира Шарлотта Эвелина Эдда Эдита Элеонора Элиза Элина Элла Эллада Элоиза Эльвира Эльга Эльза Эльмира Эля Эмилия Эмма Эрика Эрнестина Эсмеральда Этери Юзефа Юлия Юна Юния Юнона Юханна Ядвига Яна Янита Янка Ярина Ярослава].include? contact.name.split.second
-            = image_tag("#{female ? 'businesswoman.png' : 'businessman.png'}", class: "photo", alt: "Edit Entry")
-            b=contact.title
-            br=contact.company
-          - { extension: "asterisk", home: "telephone-accessible", mobile: "mobile-signal" }.each do |attr, icon|
-              li.bullet-item
-                - can_call = @call_available.include?(attr) && session[:user_id] && contact.public_send(attr)
-                span.left-box class="#{can_call ? 'enabled' : 'disabled'}" title=t(attr)
-                  i.large class="fi-#{icon}"
-                span.right-box
-                  - if can_call
-                    a href="/make_call/#{contact.public_send(attr)}"
-                      b=contact.public_send(attr)
-                  - else
-                    b=contact.public_send(attr) || "---"
-          li.bullet-item
-            span.left-box class="#{contact.mail ? 'enabled' : 'disabled'}"
-              i.large.fi-mail
-            span.right-box
-              - if contact.mail
-                a href="mailto:#{contact.mail}"
-                  = contact.mail
-              - else
-                | ---
-    - (@contacts.count % 4).times do
-      .large-3.medium-6.small-12.columns
-  - when "table_view"
-    table.expand
-      thead
-        tr
-          th= t("contact_name")
-          th= t("company_title")
-          th= t("extension")
-          th width="12%"
-            = t("home")
-          th width="12%"
-            = t("mobile")
-          th= t("mail")
-      tbody
-        - @contacts.each do |contact|
-          tr.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
-            td
-              b= contact.name
-            td
-              b= contact.title
-              br= contact.company
-            - [:extension, :home, :mobile].each do |attr|
-              td
-                - if @call_available.include?(attr) && session[:user_id] && contact.public_send(attr)
-                  a href="/make_call/#{contact.public_send(attr)}"
-                    = contact.public_send(attr)
+.row.contacts#tile_view class="#{'hide' if @current_view != 'tile_view'}"
+  - @contacts.each do |contact|
+    .large-3.medium-6.small-12.columns.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
+      ul.pricing-table
+        li.title=contact.name
+        li.description
+          = image_tag("#{is_female?(contact.name) ? 'businesswoman.png' : 'businessman.png'}", class: "photo", alt: "Edit Entry")
+          b=contact.title
+          br=contact.company
+        - { extension: "asterisk", home: "telephone-accessible", mobile: "mobile-signal" }.each do |attr, icon|
+            li.bullet-item
+              - can_call = @call_available.include?(attr) && session[:user_id] && contact.public_send(attr)
+              span.left-box class="#{can_call ? 'enabled' : 'disabled'}" title=t(attr)
+                i.large class="fi-#{icon}"
+              span.right-box
+                - if can_call
+                  a data-call = contact.public_send(attr)
+                    b=contact.public_send(attr)
                 - else
-                  = contact.public_send(attr)
+                  b=contact.public_send(attr) || "---"
+        li.bullet-item
+          span.left-box class="#{contact.mail ? 'enabled' : 'disabled'}"
+            i.large.fi-mail
+          span.right-box
+            - if contact.mail
+              a href="mailto:#{contact.mail}"
+                = contact.mail
+            - else
+              | ---
+  - (@contacts.count % 4).times do
+    .large-3.medium-6.small-12.columns
+
+.row.contacts#table_view class="#{'hide' if @current_view != 'table_view'}"
+  table.expand
+    thead
+      tr
+        th= t("contact_name")
+        th= t("company_title")
+        th= t("extension")
+        th width="12%"
+          = t("home")
+        th width="12%"
+          = t("mobile")
+        th= t("mail")
+    tbody
+      - @contacts.each do |contact|
+        tr.contact data-filter=[contact.name, contact.title, contact.company, contact.extension, contact.home, contact.mobile, contact.mail].join(':')
+          td
+            b= contact.name
+          td
+            b= contact.title
+            br= contact.company
+          - [:extension, :home, :mobile].each do |attr|
             td
-              - if contact.mail
-                a href="mailto:#{contact.mail}"
-                  = contact.mail
+              - if @call_available.include?(attr) && session[:user_id] && contact.public_send(attr)
+                a data-call = contact.public_send(attr)
+                  = contact.public_send(attr)
+              - else
+                = contact.public_send(attr)
+          td
+            - if contact.mail
+              a href="mailto:#{contact.mail}"
+                = contact.mail

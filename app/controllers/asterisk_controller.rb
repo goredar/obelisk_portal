@@ -4,7 +4,7 @@ class AsteriskController < ApplicationController
     if session[:user_id]
       ami = RubyAsterisk::AMI.new(ASTERISK_CONFIG["host"], ASTERISK_CONFIG["port"])
       ami.login(ASTERISK_CONFIG["username"], ASTERISK_CONFIG["password"])
-      flash[:info] = ami.send(:execute, 'Originate', { 'Channel' => "SIP/#{session[:user_id]}",
+      message = ami.send(:execute, 'Originate', { 'Channel' => "SIP/#{session[:user_id]}",
                                           'Exten' => params["callee"],
                                           'Context' => "from-internal",
                                           'Priority' => "1",
@@ -12,10 +12,12 @@ class AsteriskController < ApplicationController
                                           'Callerid' => session[:user_id],
                                           'Async' => "true"
                                         }).success ? t("call_queued") : t("failed_to_queue_call")
-    #@message="Originate successfully queued"
     else
-      flash[:alert] = t("should_login_to_call")
+      message = t("should_login_to_call")
     end
-    redirect_to root_path
+    respond_to do |format|
+      format.json { render json: { :message => message } }
+      format.html { render nothing: true }
+    end
   end
 end

@@ -10,7 +10,7 @@ class AsteriskController < ApplicationController
                                           'Priority' => "1",
                                           'Timeout' => '30000',
                                           'Callerid' => session[:user_id],
-                                          'Async' => "true"
+                                          'Async' => "false"
                                         }).success ? t("call_queued") : t("failed_to_queue_call")
     else
       message = t("should_login_to_call")

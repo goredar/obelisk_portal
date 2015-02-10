@@ -8,8 +8,13 @@
       .small-5.medium-4.large-3.columns
         span.prefix = t("button_photo")
       .small-7.medium-8.large-9.columns
-        .button.postfix#photo_file_name = t("no_file_selected")
+        .button.postfix.thin#photo_file_name = t("no_file_selected")
         input.button.postfix type = "file" id = "contact_photo" name = "contact_photo" onchange = "$('#photo_file_name').html($(this).val().split('\\').pop())" accept = "image/*"
+    .row.collapse
+      .small-5.medium-4.large-3.columns
+      .small-7.medium-8.large-9.columns
+        input id = "delete_contact_photo" type = "checkbox" name = "delete_contact_photo"
+        label for="delete_contact_photo" = t("delete_photo")
     .row
       .small-4.medium-4.large-4.columns
         input.button.small.expand.success name = "commit" type = "submit" value = t("button_commit")

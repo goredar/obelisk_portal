@@ -14,15 +14,15 @@
           br = contact.company
         - { extension: "asterisk", home: "telephone-accessible", mobile: "mobile-signal" }.each do |attr, icon|
             li.bullet-item
-              - can_call = @call_available.include?(attr) && session[:user_id] && contact.public_send(attr)
+              - can_call = @call_available.include?(attr) && session[:user_id] && contact.public_send(attr) && !contact.public_send(attr).empty?
               span.left-box class="#{can_call ? 'enabled' : 'disabled'}" title=t(attr)
                 i.large class="fi-#{icon}"
               span.right-box
-                - if can_call
+                - if contact.public_send(attr) && !contact.public_send(attr).empty?
                   a data-call = contact.public_send(attr)
-                    b=contact.public_send(attr)
+                    b = contact.public_send(attr)
                 - else
-                  b = contact.public_send(attr) || "---"
+                  b = "---"
         li.bullet-item
           span.left-box class = "#{ (contact.mail && !contact.mail.empty?) ? 'enabled' : 'disabled' }"
             i.large.fi-mail

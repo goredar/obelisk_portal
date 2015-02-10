@@ -56,15 +56,19 @@ class Contact < ActiveRecord::Base
   end
 
   def save_photo(io)
-    photo = MiniMagick::Image.read io.read
-    photo.resize "90x90"
-    photo.format "png"
-    filename = File.expand_path "photo_#{self.id}.png", PHOTO_PATH
-    photo.write filename
-    File.chmod 0644, filename
-    self.photo = "photo_#{self.id}.png"
+    if io
+      photo = MiniMagick::Image.read io.read
+      photo.resize "90x90"
+      photo.format "png"
+      filename = File.expand_path "photo_#{self.id}.png", PHOTO_PATH
+      photo.write filename
+      File.chmod 0644, filename
+      self.photo = "photo_#{self.id}.png"
+    else
+      self.photo = nil
+    end
   end
-  
+
   def permited_actions
     @@role_can_edit[role.to_sym]
   end

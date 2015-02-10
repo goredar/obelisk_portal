@@ -17,7 +17,7 @@ class ContactsController < ApplicationController
       flash[:alert] = t("only_self")
       redirect_to root_path and return
     end
-    @contact.save_photo params[:contact_photo] if params[:contact_photo]
+    @contact.save_photo(params[:delete_contact_photo] ? nil : params[:contact_photo])
     if @contact.update params[:contact].select{ |k,v| @user.allowed? k }.permit!
       flash[:success] = t("contact_update_done")
     else

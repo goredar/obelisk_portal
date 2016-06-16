@@ -50,7 +50,7 @@ namespace :deploy do
     end
   end
   after :deploy do
-    on roles(:web) do
+    on roles(:web), in: :groups, limit: 3, wait: 10 do
       sudo "service nginx restart"
     end
   end

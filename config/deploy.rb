@@ -2,7 +2,7 @@
 lock '3.3.5'
 
 set :application, 'obelisk_portal'
-set :repo_url, 'git@github.com:goredar/obelisk_portal.git'
+set :repo_url, 'https://github.com/goredar/obelisk_portal.git'
 set :rvm_type, :system
 
 # Default branch is :master

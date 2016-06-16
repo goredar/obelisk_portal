@@ -18,7 +18,7 @@ ru:
   contacts_filter: "Фильтр контактов"
   clear: "Очистить"
   input_text_for_search: "введите текст поиска..."
-  sign_in: "Войдите, чтобы позвонить"
+  sign_in: "Войти"
   button_sign_in: "Войти"
   sign_out: "Покинуть сайт"
   login_success: "Вы успешно авторизовались."

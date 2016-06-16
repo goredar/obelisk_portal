@@ -41,7 +41,7 @@ namespace :deploy do
   %x(git commit -a --reuse-message=HEAD)
   %x(git push)
 
-  task :restart_nginx do
+  task :restart_nginx, :roles => :web do
     sudo "service nginx restart"
   end
 

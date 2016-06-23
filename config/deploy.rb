@@ -36,23 +36,9 @@ set :linked_dirs, fetch(:linked_dirs, []).push('bin', 'log', 'tmp/pids', 'tmp/ca
 # set :keep_releases, 5
 
 namespace :deploy do
-
-  %x(git add --all .)
-  %x(git commit -a --reuse-message=HEAD)
-  %x(git push)
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
-    end
-  end
-  after :deploy do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
+  after :deploy, :clear_cache do
+    on roles(:web) do
       sudo "service nginx restart"
     end
   end
-
 end
